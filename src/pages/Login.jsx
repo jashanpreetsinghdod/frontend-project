@@ -13,7 +13,17 @@ const AVATAR_OPTIONS = [
   "https://api.dicebear.com/9.x/fun-emoji/svg?seed=Nolan",
   "https://api.dicebear.com/9.x/fun-emoji/svg?seed=Destiny",
   "https://api.dicebear.com/9.x/fun-emoji/svg?seed=Liam",
-  "https://api.dicebear.com/9.x/fun-emoji/svg?seed=Leah"
+  "https://api.dicebear.com/9.x/fun-emoji/svg?seed=Leah",
+  "https://res.cloudinary.com/dunen64uz/image/upload/v1768645404/cat_krufdy.png",
+  "https://res.cloudinary.com/dunen64uz/image/upload/v1768645403/gorilla_e7ogvd.png",
+  "https://res.cloudinary.com/dunen64uz/image/upload/v1768645402/dog_chs9ac.png",
+  "https://res.cloudinary.com/dunen64uz/image/upload/v1768645402/wolf_s6btkv.png",
+  "https://res.cloudinary.com/dunen64uz/image/upload/v1768645401/horse_vdoqez.png",
+  "https://res.cloudinary.com/dunen64uz/image/upload/v1768645401/bat_1_ycckeq.png",
+  "https://res.cloudinary.com/dunen64uz/image/upload/v1768645402/tiger_uchqhf.png",
+  "https://res.cloudinary.com/dunen64uz/image/upload/v1768645402/bat_zhqf1m.png"
+  
+  
 ];
 
 const Login = ({ setUser }) => {
