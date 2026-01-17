@@ -63,7 +63,7 @@ const Home = ({ user, setUser }) => {
       <div className="w-full max-w-md space-y-6 pt-12 md:pt-0">
         
         {/* CARD 1: WELCOME PROFILE */}
-        <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-4">
+        <div className="bg-white p-6 rounded-3xl shadow-sm border-5 border-gray-400 flex items-center gap-4">
           <div className="relative flex-shrink-0">
             <img
               src={user.avatar}
@@ -80,7 +80,7 @@ const Home = ({ user, setUser }) => {
         </div>
 
         {/* CARD 2: GAME ACTIONS */}
-        <div className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100">
+        <div className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border-5 border-gray-400">
           
           {/* Section: Create Game */}
           <div className="mb-8 md:mb-10">
