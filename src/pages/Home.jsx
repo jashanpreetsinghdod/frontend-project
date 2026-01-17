@@ -47,7 +47,7 @@ const Home = ({ user, setUser }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F9FAFB] flex flex-col items-center justify-center p-4 font-sans text-slate-800 relative">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col items-center justify-center p-4 font-sans text-slate-800 relative">
       
       {/* Logout Button (Top Right) */}
       <button
