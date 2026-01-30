@@ -225,17 +225,28 @@ const GameRoom = ({ user }) => {
             </svg>
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">Room {roomId}</h1>
-            <p className="text-gray-500 text-sm flex items-center gap-2">
-              Playing as <span className="font-bold text-gray-900">{user.username}</span>
-              {isAdmin && (
-                <span className="bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full font-bold">
-                  Banker
-                </span>
-              )}
-            </p>
-          </div>
-        </div>
+  <h1 className="text-xl font-bold text-gray-900">Room {roomId}</h1>
+  <p className="text-gray-500 text-sm flex items-center gap-2">
+    Playing as <span className="font-bold text-gray-900">{user.username}</span>
+    {isAdmin && (
+      <span className="bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full font-bold">
+        Banker
+      </span>
+    )}
+  </p>
+</div>
+
+{/* History Icon Button */}
+<button
+  onClick={() => setShowHistory(true)}
+  className="ml-4 w-10 h-10 bg-gray-100 hover:bg-emerald-50 rounded-xl flex items-center justify-center text-gray-600 hover:text-emerald-600 transition-colors group"
+  title="Transaction History"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+  </svg>
+</button>
+
 
         {/* Bank & Leave */}
         <div className="flex items-center gap-6 md:gap-12 w-full md:w-auto justify-between md:justify-end">
