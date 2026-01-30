@@ -158,9 +158,7 @@ const GameRoom = ({ user }) => {
                               {isBankAdd ? transaction.to : transaction.from} {isBankAdd ? '+' : '-'} ${transaction.amount.toLocaleString()}
                             </div>
                           </div>
-                          <div className="text-gray-400 text-xs ml-4">
-                            {new Date(transaction.timestamp).toLocaleTimeString()}
-                          </div>
+                         
                         </div>
                       ) : (
                         // Player to Player Transaction Display
@@ -182,9 +180,7 @@ const GameRoom = ({ user }) => {
                               {transaction.to}
                             </div>
                           </div>
-                          <div className="text-gray-400 text-xs ml-4">
-                            {new Date(transaction.timestamp).toLocaleTimeString()}
-                          </div>
+        
                         </div>
                       )}
                       {index < gameData.transactionHistory.length - 1 && (
