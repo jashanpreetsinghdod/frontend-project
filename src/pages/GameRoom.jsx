@@ -175,7 +175,7 @@ const GameRoom = ({ user }) => {
           return (
             <div
               key={player.userId}
-              className={`bg-white rounded-3xl p-6 shadow-sm border ${
+              className={`bg-white rounded-3xl p-6 shadow-sm border-2 ${
                 isMe ? "border-emerald-500" : "border-gray-100"
               } transition-all hover:shadow-md flex flex-col justify-between`}
             >
