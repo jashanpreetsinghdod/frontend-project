@@ -11,6 +11,7 @@ const GameRoom = ({ user }) => {
   const { roomId } = useParams();
   const [gameData, setGameData] = useState(null);
   const [notification, setNotification] = useState(null);
+  const [showHistory, setShowHistory] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -106,7 +107,105 @@ const GameRoom = ({ user }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4 md:p-8 font-sans text-slate-800">
-      
+      {/* --- TRANSACTION HISTORY POPUP --- */}
+      {showHistory && (
+        <div 
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={() => setShowHistory(false)}
+        >
+          <div 
+            className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Popup Header */}
+            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-6 text-white">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <h2 className="text-2xl font-bold">Transaction History</h2>
+                </div>
+                <button 
+                  onClick={() => setShowHistory(false)}
+                  className="hover:bg-white/20 rounded-full p-2 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Scrollable Transaction List */}
+            <div className="overflow-y-auto max-h-[calc(80vh-100px)] p-6">
+              {gameData?.transactionHistory && gameData.transactionHistory.length > 0 ? (
+                <div className="space-y-4">
+                  {[...gameData.transactionHistory].reverse().map((transaction, index) => {
+                    const isBankTransaction = transaction.type === "BANK_ADD" || transaction.type === "BANK_DEDUCT";
+                    const isBankAdd = transaction.type === "BANK_ADD";
+                    const isBankDeduct = transaction.type === "BANK_DEDUCT";
+                    
+                    return (
+                    <div key={index}>
+                      {isBankTransaction ? (
+                        // Bank Transaction Display
+                        <div className="flex items-center justify-between py-4">
+                          <div className="flex items-center gap-3 flex-1">
+                            <div className={`font-bold px-4 py-2 rounded-lg text-base ${
+                              isBankAdd ? 'bg-blue-50 text-blue-600' : 'bg-red-50 text-red-600'
+                            }`}>
+                              {isBankAdd ? transaction.to : transaction.from} {isBankAdd ? '+' : '-'} ${transaction.amount.toLocaleString()}
+                            </div>
+                          </div>
+                          <div className="text-gray-400 text-xs ml-4">
+                            {new Date(transaction.timestamp).toLocaleTimeString()}
+                          </div>
+                        </div>
+                      ) : (
+                        // Player to Player Transaction Display
+                        <div className="flex items-center justify-between py-4">
+                          <div className="flex items-center gap-4 flex-1">
+                            <div className="bg-emerald-50 text-emerald-600 font-bold px-3 py-1 rounded-lg text-sm">
+                              {transaction.from}
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-400">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                              </svg>
+                              <span className="font-bold text-emerald-600 text-lg">${transaction.amount.toLocaleString()}</span>
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                              </svg>
+                            </div>
+                            <div className="bg-blue-50 text-blue-600 font-bold px-3 py-1 rounded-lg text-sm">
+                              {transaction.to}
+                            </div>
+                          </div>
+                          <div className="text-gray-400 text-xs ml-4">
+                            {new Date(transaction.timestamp).toLocaleTimeString()}
+                          </div>
+                        </div>
+                      )}
+                      {index < gameData.transactionHistory.length - 1 && (
+                        <div className="border-b border-gray-100"></div>
+                      )}
+                    </div>
+                  )})}
+                </div>
+              ) : (
+                <div className="text-center py-12 text-gray-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto mb-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <p className="text-lg font-medium">No transactions yet</p>
+                  <p className="text-sm mt-2">Transaction history will appear here</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
       {/* --- NOTIFICATION TOAST --- */}
       {notification && (
         <div className="fixed top-6 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-full shadow-xl z-50 animate-bounce">
