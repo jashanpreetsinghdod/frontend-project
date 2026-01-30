@@ -161,7 +161,14 @@ const GameRoom = ({ user }) => {
 
       {/* --- PLAYERS GRID --- */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {gameData.players.map((player) => {
+        {gameData.players
+          .sort((a, b) => {
+            // Sort so current user's card appears first
+            if (a.userId === user._id) return -1;
+            if (b.userId === user._id) return 1;
+            return 0;
+          })
+          .map((player) => {
           const isMe = player.userId === user._id;
           const isBanker = player.userId === gameData.adminId;
 
