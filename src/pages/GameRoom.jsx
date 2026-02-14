@@ -312,10 +312,16 @@ const GameRoom = ({ user }) => {
               </div>
 
               {/* Balance Section */}
+              {/* Balance Section */}
               <div className="mb-4 md:mb-8 text-center md:text-left">
-                <p className="text-gray-400 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-0.5 md:mb-1">Balance</p>
-                {/* Balance: Smaller text on mobile */}
-                <p className="text-lg md:text-3xl font-bold text-gray-900 tracking-tight">
+                <p className="text-gray-400 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-0.5 md:mb-1">
+                  Balance
+                </p>
+                
+                <p className={`text-lg md:text-3xl font-bold text-gray-900 tracking-tight transition-all duration-300 ${
+                    !isMe ? "blur-md select-none opacity-50" : ""
+                  }`}
+                >
                   ${player.balance.toLocaleString()}
                 </p>
               </div>
